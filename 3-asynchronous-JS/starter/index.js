@@ -84,11 +84,21 @@ const getDagPic = async () => {
   return 'READY 😎';
 };
 
-getDagPic()
-  .then((data) => {
+// getDagPic()
+//   .then((data) => {
+//     console.log(data);
+//     console.log('Finished');
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
+
+(async () => {
+  try {
+    const data = await getDagPic();
     console.log(data);
     console.log('Finished');
-  })
-  .catch((err) => {
+  } catch (err) {
     console.log(err);
-  });
+  }
+})();
