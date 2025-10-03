@@ -79,7 +79,16 @@ const getDagPic = async () => {
     console.log('File data saved');
   } catch (err) {
     return console.log(`Err: ${err.message}`);
+    throw err;
   }
+  return 'READY 😎';
 };
 
-getDagPic();
+getDagPic()
+  .then((data) => {
+    console.log(data);
+    console.log('Finished');
+  })
+  .catch((err) => {
+    console.log(err);
+  });
