@@ -5,6 +5,16 @@ const app = express();
 
 app.use(express.json());
 
+app.use((req, res, next) => {
+  console.log('Hello form the middleware!');
+  next();
+});
+
+app.use((req, res, next) => {
+  req.requestTime = new Date().toISOString();
+  next();
+});
+
 // app.get('/', (req, res) => {
 //   res.status(404).json({
 //     message: 'Hello from the server side',
@@ -26,6 +36,7 @@ const tours = JSON.parse(
 const getAllTours = (req, res) => {
   res.status(200).json({
     status: 'success',
+    time: req.requestTime,
     results: tours.length,
     data: {
       tours,
@@ -42,12 +53,14 @@ const getTour = (req, res) => {
   if (!tour) {
     return res.status(404).json({
       status: 'fail',
+      time: req.requestTime,
       message: 'Invalid ID',
     });
   }
 
   res.status(200).json({
     status: 'success',
+    time: req.requestTime,
     data: {
       tour,
     },
@@ -65,6 +78,7 @@ const createTour = (req, res) => {
     (err) => {
       res.status(201).json({
         status: 'success',
+        time: req.requestTime,
         data: {
           tour: newTour,
         },
@@ -77,12 +91,14 @@ const updateTour = (req, res) => {
   if (req.params.id * 1 > tours.length) {
     return res.status(404).json({
       status: 'fail',
+      time: req.requestTime,
       message: 'Invalid ID',
     });
   }
 
   res.status(200).json({
     status: 'success',
+    time: req.requestTime,
     data: {
       tour: '<Updated tour here...>',
     },
@@ -93,12 +109,14 @@ const deleteTour = (req, res) => {
   if (req.params.id * 1 > tours.length) {
     return res.status(404).json({
       status: 'fail',
+      time: req.requestTime,
       message: 'Invalid ID',
     });
   }
 
   res.status(204).json({
     status: 'success',
+    time: req.requestTime,
     data: null,
   });
 };
