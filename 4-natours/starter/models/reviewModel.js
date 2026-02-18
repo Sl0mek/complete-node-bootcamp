@@ -1,4 +1,4 @@
-const moongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 const reviewSchema = new mongoose.Schema(
   {
@@ -32,6 +32,6 @@ const reviewSchema = new mongoose.Schema(
   },
 );
 
-const Review = moongoose.model('Review', reviewSchema);
+const Review = mongoose.model('Review', reviewSchema);
 
 module.exports = Review;
