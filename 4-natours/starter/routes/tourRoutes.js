@@ -13,6 +13,7 @@ const {
 } = require('./../controllers/tourController');
 
 const authController = require('./../controllers/authController');
+const reviewController = require('./../controllers/reviewController');
 
 const router = express.Router();
 
@@ -32,7 +33,15 @@ router
   .delete(
     authController.protect,
     authController.restrictTo('admin', 'lead-guide'),
-    deleteTour
+    deleteTour,
+  );
+
+router
+  .route('/:tourId/rewiews')
+  .post(
+    authController.protect,
+    authController.restrictTo('user'),
+    reviewController.createReview,
   );
 
 module.exports = router;
