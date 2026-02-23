@@ -1,6 +1,6 @@
 const express = require('express');
 const {
-  getAllTours,
+  getAll,
   createTour,
   getTour,
   updateTour,
@@ -30,12 +30,12 @@ router.use('/:tourId/rewiews', reviewRouter);
 
 // router.param('id', checkID);
 
-router.route('/top-5-cheap').get(aliasToptours, getAllTours);
+router.route('/top-5-cheap').get(aliasToptours, getAll);
 router.route('/tour-stats').get(getTourStats);
 router.route('/monthly-plan/:year').get(getMonthlyPlan);
 router
   .route('/')
-  .get(authController.protect, getAllTours)
+  .get(authController.protect, getAll)
   .post(checkBody, createTour);
 router
   .route('/:id')

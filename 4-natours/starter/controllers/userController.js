@@ -2,18 +2,19 @@ const User = require('./../models/userModel');
 const catchAsync = require('./../utils/catchAsync');
 const factory = require('./handlerFactory');
 
-exports.getAllUsers = catchAsync(async (req, res, next) => {
-  const users = await User.find();
+exports.getAllUsers = factory.getAll(User);
+// exports.getAllUsers = catchAsync(async (req, res, next) => {
+//   const users = await User.find();
 
-  // SEND RESPONSE
-  res.status(200).json({
-    status: 'success',
-    results: users.length,
-    data: {
-      users,
-    },
-  });
-});
+//   // SEND RESPONSE
+//   res.status(200).json({
+//     status: 'success',
+//     results: users.length,
+//     data: {
+//       users,
+//     },
+//   });
+// });
 
 const filterObj = (obj, ...allowedFields) => {
   const newObj = {};
@@ -60,19 +61,20 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.getUser = (req, res) => {
-  res.status(500).json({
-    status: 'err',
-    time: req.requestTime,
-    message: 'This route is not implemented yet!',
-  });
-};
+exports.getUser = factory.getOne(User);
+// exports.getUser = (req, res) => {
+//   res.status(500).json({
+//     status: 'err',
+//     time: req.requestTime,
+//     message: 'This route is not implemented yet!',
+//   });
+// };
 
 exports.createUser = (req, res) => {
   res.status(500).json({
     status: 'err',
     time: req.requestTime,
-    message: 'This route is not implemented yet!',
+    message: 'This route is not definet! Please use/signup instead!',
   });
 };
 
