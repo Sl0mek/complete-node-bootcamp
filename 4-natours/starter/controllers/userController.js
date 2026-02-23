@@ -51,15 +51,14 @@ exports.updateMe = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.deleteMe = factory.deleteOne(User);
-// exports.deleteMe = catchAsync(async (req, res, next) => {
-//   await User.findByIdAndUpdate(req.user.id, { active: false });
+exports.deleteMe = catchAsync(async (req, res, next) => {
+  await User.findByIdAndUpdate(req.user.id, { active: false });
 
-//   res.status(204).json({
-//     status: 'success',
-//     data: null,
-//   });
-// });
+  res.status(204).json({
+    status: 'success',
+    data: null,
+  });
+});
 
 exports.getUser = (req, res) => {
   res.status(500).json({
@@ -77,18 +76,20 @@ exports.createUser = (req, res) => {
   });
 };
 
-exports.updateUser = (req, res) => {
-  res.status(500).json({
-    status: 'err',
-    time: req.requestTime,
-    message: 'This route is not implemented yet!',
-  });
-};
+exports.updateUser = factory.updateOne(User);
+// exports.updateUser = (req, res) => {
+//   res.status(500).json({
+//     status: 'err',
+//     time: req.requestTime,
+//     message: 'This route is not implemented yet!',
+//   });
+// };
 
-exports.deleteUser = (req, res) => {
-  res.status(500).json({
-    status: 'err',
-    time: req.requestTime,
-    message: 'This route is not implemented yet!',
-  });
-};
+exports.deleteUser = factory.deleteOne(User);
+// exports.deleteUser = (req, res) => {
+//   res.status(500).json({
+//     status: 'err',
+//     time: req.requestTime,
+//     message: 'This route is not implemented yet!',
+//   });
+// };
